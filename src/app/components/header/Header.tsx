@@ -1,9 +1,8 @@
 import React from "react";
 import { Link, Route, Switch } from "react-router-dom";
 import styled from "styled-components";
-import HighScorePage from "../../containers/highScorePage/HighScorePage";
-import MainPage from "../../containers/mainPage/MainPage";
 import { useTheme } from "../../hooks/useTheme";
+import routes from "../../routes/routes";
 import "./Header.css";
 
 function Header() {
@@ -38,13 +37,18 @@ function Header() {
       </nav>
 
       <Switch>
-        <Route exact path="/">
-          <MainPage />
-        </Route>
-
-        <Route path="/high_score">
-          <HighScorePage />
-        </Route>
+        {routes?.map((route, i) => {
+          return (
+            <Route
+              key={i}
+              exact={route?.exact}
+              path={route.path}
+              render={(props) => {
+                return <route.component />;
+              }}
+            />
+          );
+        })}
       </Switch>
     </div>
   );
