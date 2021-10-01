@@ -15,5 +15,10 @@ export const themes = {
       },
     },
     font: "Fira Sans",
+    fontSize: {
+      header: "14px",
+      title: "20px",
+      content: "16px",
+    },
   },
 };

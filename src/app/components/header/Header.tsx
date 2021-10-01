@@ -1,26 +1,44 @@
 import React from "react";
-import { Link, Switch, Route } from "react-router-dom";
+import { Link, Route, Switch } from "react-router-dom";
+import styled from "styled-components";
 import HighScorePage from "../../containers/highScorePage/HighScorePage";
 import MainPage from "../../containers/mainPage/MainPage";
+import { useTheme } from "../../hooks/useTheme";
 import "./Header.css";
 
 function Header() {
+  const theme = useTheme();
+
+  const AppLink = styled(Link)`
+    color: ${theme.colors.link.text};
+    font-size: ${theme.fontSize.header};
+  `;
+
+  const List = styled.ul`
+    display: flex;
+    list-style-type: none;
+  `;
+
+  const ListItem = styled.li`
+    flex-basis: 15%;
+  `;
+
   return (
     <div className="Header">
       <nav>
-        <ul>
-          <li>
-            <Link to="/">Main Page</Link>
-          </li>
+        <List>
+          <ListItem>
+            <AppLink to="/">Main Page</AppLink>
+          </ListItem>
 
-          <li>
-            <Link to="high_score">High Score Page</Link>
-          </li>
-        </ul>
+          <ListItem>
+            <AppLink to="high_score">High Score Page</AppLink>
+          </ListItem>
+        </List>
       </nav>
 
       <Switch>
-        <Route path="/">
+        <Route exact path="/">
           <MainPage />
         </Route>
 
